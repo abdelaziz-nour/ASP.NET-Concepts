@@ -1,0 +1,40 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "New";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary"> Add New Ctaegory</h2>
+            <hr />
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div>
+            <input type="file" asp-for="clientFile" onchange="loadFile(event)" />
+            <img id="img" height="200" />
+        </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-outline-success"> save</button>
+        <a asp-action="Index" asp-controller="Category" class="btn btn-outline-info"> back</a>
+    </div>
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        var loadFile = function (event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var img = document.getElementById('img');
+                img.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+}
